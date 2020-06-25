@@ -1,4 +1,4 @@
-var xeroImportedUpToBoardId = '343260470';
+var xeroImportedUpToBoardId = '343257806';
 var xeroImportedUpToColumnId = '343260470';
 var miscCustomerId = '192484274';
 

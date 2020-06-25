@@ -1,4 +1,9 @@
-var api, customerBoardId;
+var xeroImportedUpToBoardId = '343260470';
+var xeroImportedUpToColumnId = '343260470';
+var miscCustomerId = '192484274';
+
+var xeroDataHtmlId = 'ext-gen40';
+
 var customers = [];
 var xeroArr = [];
 
@@ -26,7 +31,7 @@ function getCustomerData() {
 
 function getUpdatedJobs() {
 
-  var mondayQuery = 'query { items (ids: [343260470]) { name } }'; // most recent imported from Xero ID
+  var mondayQuery = 'query { items (ids: [' + xeroImportedUpToColumnId + ']) { name } }'; // most recent imported from Xero ID
 
   callMonday(mondayQuery, function(data) {
     var getItemsFrom = parseInt(data['data']['items'][0]['name']) + 1;
@@ -37,7 +42,7 @@ function getUpdatedJobs() {
 }
 
 function getXeroData(importFromXeroId) {
-  var xeroData = document.getElementById('ext-gen40');
+  var xeroData = document.getElementById(xeroDataHtmlId);
 
   for (var i = 1; i < xeroData.rows.length; i++) {
     var xeroId = parseInt(xeroData.rows[i].cells[0].innerText, 10);
@@ -49,7 +54,7 @@ function getXeroData(importFromXeroId) {
     try {
       companyId = customers.find(x => x.name === xeroCompany)['id'];
     } catch {
-      companyId = '192484274'; // misc id
+      companyId = miscCustomerId;
     }
 
     var xeroUrl = xeroData.rows[i].cells[3].getElementsByTagName('a')[0].getAttribute('href');
@@ -73,7 +78,7 @@ function addNewXeroRowsToMonday(importFromXeroId) {
   var maxXeroId = 0;
 
   for (var i = 0; i < xeroArr.length; i++) {
-    var mondayQuery = 'mutation { create_item ( board_id: 608197264, group_id: "topics"' +
+    var mondayQuery = 'mutation { create_item ( board_id: ' + workBoardId + ', group_id: "topics"' +
       ', item_name: "' + xeroArr[i].number + '"' +
       ', column_values: ' +
         JSON.stringify(
@@ -94,31 +99,8 @@ function addNewXeroRowsToMonday(importFromXeroId) {
 }
 
 function setLastXeroId(maxXeroId) {
-  var mondayQuery2 = 'mutation { change_column_value (board_id: 343257806, item_id: 343260470, column_id: "name", value: "' + maxXeroId + '") { id } }';
+  var mondayQuery2 = 'mutation { change_column_value (board_id: ' + xeroImportedUpToBoardId + ', item_id: ' + xeroImportedUpToColumnId + ', column_id: "name", value: "' + maxXeroId + '") { id } }';
   callMonday(mondayQuery2, function(data) {
     alert('Invoices added to Monday.');
   });
-}
-
-function callMonday(query, func) {
-  fetch ("https://api.monday.com/v2", {
-    method: 'post',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization' : api
-    },
-    body: JSON.stringify({
-      'query' : query
-    })
-  })
-  .then((resp) => resp.json())
-  .then(function(data) {
-    if (data['errors'] !== undefined) {
-      alert('Error occurred, see console.')
-      console.log(data);
-      return false;
-    }
-
-    func(data)
-  })
 }

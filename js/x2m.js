@@ -104,3 +104,27 @@ function setLastXeroId(maxXeroId) {
     alert('Invoices added to Monday.');
   });
 }
+
+function callMonday(query, func) {
+  fetch ("https://api.monday.com/v2", {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization' : api
+    },
+    body: JSON.stringify({
+      'query' : query
+    })
+  })
+  .then((resp) => resp.json())
+  .then(function(data) {
+    console.log(data);
+
+    if (data['errors'] !== undefined) {
+      alert('Error occurred, see console.')
+      return false;
+    }
+
+    func(data)
+  })
+}

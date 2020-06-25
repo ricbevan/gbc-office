@@ -10,7 +10,7 @@ var xeroArr = [];
 getCustomerData();
 
 function getCustomerData() {
-  var mondayQuery = 'query { boards (ids: ' + gbcCustomerBoardId + ') { items { id column_values { id text } } } }'; // get all rows from customers
+  var mondayQuery = 'query { boards (ids: ' + customerBoardId + ') { items { id column_values { id text } } } }'; // get all rows from customers
 
   callMonday(mondayQuery, function(data) {
     var customerData = data['data']['boards'][0]['items'];

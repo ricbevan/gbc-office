@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(event) {
   gbc('#key').val(api);
-  gbc('#user-id').val(guserId);
+  gbc('#user-id').val(userId);
   gbc('#work-board-id').val(workBoardId);
   gbc('#customer-board-id').val(customerBoardId);
 

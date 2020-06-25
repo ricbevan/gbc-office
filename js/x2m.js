@@ -7,6 +7,8 @@ var xeroDataHtmlId = 'ext-gen40';
 var customers = [];
 var xeroArr = [];
 
+var api, workBoardId, customerBoardId;
+
 getCustomerData();
 
 function getCustomerData() {

@@ -1,3 +1,25 @@
+if(window.location.hash) {
+  // remove the hash and split the hash
+  var hash = window.location.hash.substr(1).split('-');
+
+  if (hash.length == 4) {
+    var key = hash[0];
+    var userId = hash[1];
+    var workBoardId = hash[2];
+    var customerBoardId = hash[3];
+
+    setLocalStorage(gbcKey, key);
+    setLocalStorage(gbcUserId, userId);
+    setLocalStorage(gbcWorkBoardId, workBoardId);
+    setLocalStorage(gbcCustomerBoardId, customerBoardId);
+
+    // redirect without any hash
+    window.location.replace('job-completion.html');
+  } else {
+    notification('Not enough values in settings.', 'danger');
+  }
+}
+
 var workBoardColumns = [
   {
     'columnId': 'people',

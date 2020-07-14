@@ -107,7 +107,7 @@ function addNewXeroRowsToMonday(importFromXeroId) {
 function setLastXeroId(maxXeroId) {
   var mondayQuery2 = 'mutation { change_column_value (board_id: ' + xeroImportedUpToBoardId + ', item_id: ' + xeroImportedUpToColumnId + ', column_id: "name", value: "' + maxXeroId + '") { id } }';
   callMonday(mondayQuery2, function(data) {
-    alert('Invoices added to Monday.');
+    alert((xeroArr.length + 1) + ' invoices added to Monday.');
   });
 }
 

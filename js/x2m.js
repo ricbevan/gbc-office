@@ -77,7 +77,11 @@ function getXeroData(importFromXeroId) {
     }
   }
 
-  addNewXeroRowsToMonday(importFromXeroId);
+  if (xeroArr.length == 0) {
+    alert('There are no new records.');
+  } else {
+    addNewXeroRowsToMonday(importFromXeroId);
+  }
 }
 
 function addNewXeroRowsToMonday(importFromXeroId) {

@@ -190,6 +190,7 @@ function getJobStaff() {
           // card > flex > button div > button
           var button = document.createElement('button');
           button.classList.add('uk-button', 'uk-border-rounded');
+          button.classList.add('uk-button', 'uk-margin-small-left');
           button.setAttribute('data-column-id', workBoardColumns[i]['columnId']);
           button.setAttribute('data-new-assigned-ids', JSON.stringify(newAssignedIds));
 

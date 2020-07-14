@@ -18,7 +18,17 @@
                 <button class="uk-button uk-button-primary uk-border-rounded" id="complete-job"><span uk-icon="icon: search"></span></button>
               </div>
             </div>
-            <div class="uk-child-width-1-1 uk-grid-medium" id ="job-actions" uk-grid></div>
+            <div id="job-editing" class="uk-hidden">
+              <div class="uk-child-width-1-1 uk-grid-medium" id="job-actions" uk-grid></div>
+              <p class="uk-heading-bullet uk-text-lead uk-margin-large-top">Updates</p>
+              <div class="uk-list uk-list-circle" id="job-updates"></div>
+              <div class="uk-flex-center" uk-grid>
+                <div class="uk-margin uk-width-1-1">
+                  <textarea class="uk-textarea uk-width-1-1" type="text" placeholder="Add an update" id="job-update"></textarea>
+                  <button class="uk-button uk-button-primary uk-border-rounded uk-width-1-1 uk-margin-small-top" id="add-update">Add update</button>
+                </div>
+              </div>
+            </div>
             <div class="uk-flex-center uk-position-bottom" uk-grid>
               <div class="uk-margin">
                 <p id="user"></p>

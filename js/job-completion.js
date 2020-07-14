@@ -40,6 +40,7 @@ var workBoardColumns = [
 ];
 
 var userName = '';
+var jobNumber = '';
 
 gbc('#job-number').on('keyup', function(e) {
   if (e.keyCode === 13) {
@@ -50,6 +51,10 @@ gbc('#job-number').on('keyup', function(e) {
 
 gbc('#complete-job').on('click', function(e) {
   getJobStaff();
+});
+
+gbc('#add-update').on('click', function(e) {
+  addUpdate();
 });
 
 logOnToMonday();
@@ -71,9 +76,31 @@ function logOnToMonday() {
   });
 }
 
+function addUpdate() {
+  let jobUpdate = gbc('#job-update').val();
+
+  if (jobUpdate == '') {
+    notification('Please enter an update', 'warning');
+  } else {
+    showLoading('Adding update');
+
+    let mondayQuery = 'mutation { create_update (item_id: ' + jobNumber +
+      ', body: "<p>' + userName + ': ' + jobUpdate + '</p>") { id } }';
+
+    callMonday(mondayQuery, function(data) {
+      hideLoading();
+      getJobStaff();
+    });
+  }
+}
+
 function getJobStaff() {
   let jobNumberTextBox = gbc('#job-number').val();
   gbc('#job-actions').html(''); // clear any job actions already generated
+  gbc('#job-updates').html(''); // clear any job updates already generated
+  gbc('#job-update').val(''); // clear job update text
+  jobNumber = ''; // clear update job id
+  gbc('#job-editing').addClass('uk-hidden'); // always ensure editing is hidden until...
 
   if (jobNumberTextBox == '') {
     notification('Please enter a job number', 'warning');
@@ -82,7 +109,7 @@ function getJobStaff() {
 
     let mondayQuery = '{ items_by_column_values ' +
       '(board_id: ' + workBoardId + ', column_id: "name", column_value: "' + jobNumberTextBox + '") ' +
-      '{ id, name, column_values { id, text, value } } }';
+      '{ id, name, column_values { id, text, value }, updates(limit: 10) { body } } }';
 
     callMonday(mondayQuery, function(data) {
 
@@ -95,8 +122,19 @@ function getJobStaff() {
       } else if (jobJson.length > 1) {
         showError('There are multiple jobs with the number ' + jobNumberTextBox + ', please speak to the office', 'danger');
       } else {
+        // ... until a valid job is provided
+        gbc('#job-editing').removeClass('uk-hidden');
 
         jobJson = jobJson[0]; // get the first job in the array (this should be the only job)
+
+        var itemUpdates = jobJson['updates'];
+        var itemUpdateString = '';
+
+        for (i = 0; i < itemUpdates.length; i++) {
+          itemUpdateString += itemUpdates[i]['body'];
+        }
+
+        document.getElementById('job-updates').innerHTML = itemUpdateString;
 
         for (i = 0; i < workBoardColumns.length; i++) {
           var newAssignedIds = [];
@@ -171,6 +209,8 @@ function getJobStaff() {
             setAssignedStaff(jobNumberTextBox, jobJson['id'], this.getAttribute('data-column-id'), this.getAttribute('data-new-assigned-ids'));
           });
 
+          jobNumber = jobJson['id'];
+
           cardFlexDiv.appendChild(button);
           cardDiv.appendChild(cardFlexDiv);
           document.getElementById('job-actions').appendChild(cardDiv);
@@ -195,7 +235,7 @@ function setAssignedStaff(itemName, itemId, columnId, newAssignedIds) {
     '{ id, name } }';
 
   callMonday(mondayQuery, function(data) {
-    hideLoading()
+    hideLoading();
     getJobStaff();
   });
 }
@@ -217,6 +257,6 @@ function showError(error) {
 }
 
 const capitalise = (s) => {
-  if (typeof s !== 'string') return ''
-  return s.charAt(0).toUpperCase() + s.slice(1)
+  if (typeof s !== 'string') return '';
+  return s.charAt(0).toUpperCase() + s.slice(1);
 }

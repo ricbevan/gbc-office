@@ -9,7 +9,11 @@ var xeroArr = [];
 
 var api, workBoardId, customerBoardId;
 
-getCustomerData();
+if (window.location.href !== 'https://go.xero.com/AccountsReceivable/Search.aspx') {
+  window.location.href = 'https://go.xero.com/AccountsReceivable/Search.aspx'
+} else {
+  getCustomerData();
+}
 
 function getCustomerData() {
   var mondayQuery = 'query { boards (ids: ' + customerBoardId + ') { items { id column_values { id text } } } }'; // get all rows from customers

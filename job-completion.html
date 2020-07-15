@@ -5,7 +5,6 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://gbc.uk/css/uikit.min.css" />
-        <link rel="stylesheet" href="css/style.css" />
     </head>
     <body>
 
@@ -15,7 +14,7 @@
             <div class="uk-flex-center" uk-grid>
               <div class="uk-margin">
                 <img src="https://gbc.uk/media/images/icons/favicon-96x96.png" width="38" height="38" class="uk-margin-small-right" />
-                <input class="uk-input uk-form-width-small" type="number" placeholder="Job Number" id="job-number">
+                <input class="uk-input uk-form-width-small" inputmode="text" pattern="[0-9]*" type="number" placeholder="Job Number" id="job-number">
                 <button class="uk-button uk-button-primary uk-border-rounded" id="complete-job"><span uk-icon="icon: search"></span></button>
               </div>
             </div>

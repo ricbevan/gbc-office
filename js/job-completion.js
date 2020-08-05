@@ -22,6 +22,10 @@ if(window.location.hash) {
 
 var workBoardColumns = [
   {
+    'columnId': 'people8',
+    'columnName': 'powder check'
+  },
+  {
     'columnId': 'people',
     'columnName': 'coat'
   },

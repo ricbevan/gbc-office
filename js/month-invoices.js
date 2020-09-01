@@ -7,9 +7,7 @@ if (!thisMonth)
 var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
 var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
 
-
-
-console.log('https://go.xero.com/AccountsReceivable/Search.aspx?invoiceStatus=INVOICESTATUS%2fAUTHORISED&graphSearch=False&startDate=' +
+window.location.replace('https://go.xero.com/AccountsReceivable/Search.aspx?invoiceStatus=INVOICESTATUS%2fAUTHORISED&graphSearch=False&startDate=' +
   formatDate(firstDay) +
   '&endDate=' +
   formatDate(lastDay) +

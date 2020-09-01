@@ -1,12 +1,13 @@
 var thisMonth;
 var date = new Date();
+
+if (!thisMonth)
+  date.setMonth(date.getMonth() + 1);
+
 var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
 var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
 
-if (!thisMonth) {
-  firstDay.setMonth(firstDay.getMonth() + 1);
-  lastDay.setMonth(lastDay.getMonth() + 1);
-}
+
 
 console.log('https://go.xero.com/AccountsReceivable/Search.aspx?invoiceStatus=INVOICESTATUS%2fAUTHORISED&graphSearch=False&startDate=' +
   formatDate(firstDay) +

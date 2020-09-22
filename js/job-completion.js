@@ -40,6 +40,10 @@ var workBoardColumns = [
   {
     'columnId': 'people0',
     'columnName': 'blast'
+  },
+  {
+    'columnId': 'people00',
+    'columnName': 'goods-in check'
   }
 ];
 

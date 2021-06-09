@@ -248,24 +248,3 @@ function setAssignedStaff(itemName, itemId, columnId, newAssignedIds) {
     getJobStaff();
   });
 }
-
-function hideLoading() {
-  gbc('#loading').addClass('uk-hidden');
-}
-
-function showLoading(message) {
-  gbc('#loading').removeClass('uk-hidden');
-  gbc('#loading-spinner').removeClass('uk-hidden');
-  gbc('#loading-message').html(message);
-}
-
-function showError(error) {
-  gbc('#loading').removeClass('uk-hidden');
-  gbc('#loading-spinner').addClass('uk-hidden');
-  gbc('#loading-message').html('Error: ' + error);
-}
-
-const capitalise = (s) => {
-  if (typeof s !== 'string') return '';
-  return s.charAt(0).toUpperCase() + s.slice(1);
-}

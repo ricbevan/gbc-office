@@ -7,3 +7,8 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+.gbc-date-picker-padding {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}

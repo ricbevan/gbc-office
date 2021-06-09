@@ -16,6 +16,11 @@ function setLocalStorage(key, val) {
   localStorage.setItem(key, val);
 }
 
+function clearLocalStorage(key) {
+  localStorage.removeItem(key);
+}
+
+
 function notification(message, notificationType) {
   UIkit.notification({
     message: message,

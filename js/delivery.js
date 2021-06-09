@@ -1,14 +1,15 @@
 var gbcDeliveryBoardId = 'gbc-delivery-board-id';
 var deliveryBoardId = getLocalStorage(gbcDeliveryBoardId);
 
+var gbcDeliverTo = 'gbc-deliver-to';
+var gbcDeliverInvoices = 'gbc-deliver-invoices';
+var gbcDeliverLeave = 'gbc-deliver-leave';
+var gbcDeliverArrive = 'gbc-deliver-arrive';
+
 let mondayLeaveColumnId = 'hour';
 let mondayArriveColumnId = 'hour5';
 let mondayInvoicesDeliveredColumnId = 'text';
 let mondayDeliveryDate = 'date5';
-
-// set today's date by default
-var today = new Date();
-gbc('#delivery-date').val(today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2));
 
 if(window.location.hash) {
   // remove the hash and split the hash
@@ -30,18 +31,51 @@ if(window.location.hash) {
   }
 }
 
-logOnToMonday();
+document.addEventListener("DOMContentLoaded", function(event) {
 
-gbc('#delivery-date').on('change', function(e) {
-  getDeliveries();
-});
+  // set today's date by default
+  var today = new Date();
+  gbc('#delivery-date').val(today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2));
 
-gbc('#add-delivery').on('click', function(e) {
-  createDelivery();
-});
+  var deliverTo = getLocalStorage(gbcDeliverTo);
+  var deliverInvoices = getLocalStorage(gbcDeliverInvoices);
+  var deliverLeave = getLocalStorage(gbcDeliverLeave);
+  var deliverArrive = getLocalStorage(gbcDeliverArrive);
 
-gbc('#delivery-refresh').on('click', function(e) {
-  getDeliveries();
+  gbc('#delivery-date').on('change', function(e) {
+    getDeliveries();
+  });
+
+  gbc('#delivery-company').on('change', function(e) {
+    var deliveryCompany = e.target.value;
+    setLocalStorage(gbcDeliverTo, deliveryCompany);
+  }).val(deliverTo);
+
+  gbc('#delivery-invoices').on('change', function(e) {
+    var deliveryInvoices = e.target.value;
+    setLocalStorage(gbcDeliverInvoices, deliveryInvoices);
+  }).val(deliverInvoices);
+
+  gbc('#delivery-leave').on('change', function(e) {
+    var deliveryLeave = e.target.value;
+    setLocalStorage(gbcDeliverLeave, deliveryLeave);
+  }).val(deliverLeave);
+
+  gbc('#delivery-arrive').on('change', function(e) {
+    var deliveryArrive = e.target.value;
+    setLocalStorage(gbcDeliverArrive, deliveryArrive);
+  }).val(deliverArrive);
+
+  gbc('#add-delivery').on('click', function(e) {
+    createDelivery();
+  });
+
+  gbc('#delivery-refresh').on('click', function(e) {
+    getDeliveries();
+  });
+
+  logOnToMonday();
+
 });
 
 function logOnToMonday() {
@@ -155,7 +189,7 @@ function createDelivery() {
 
   if (!deliveryCompany || !deliveryLeave || !deliveryArrive) {
     UIkit.notification({
-      message: 'Ensure all text boxes are filled in.',
+      message: 'Ensure company, leave time and arrival time are filled in.',
       status: 'danger',
       pos: 'top-center',
       timeout: 5000
@@ -189,6 +223,11 @@ function createDelivery() {
       gbc('#delivery-invoices').val('');
       gbc('#delivery-leave').val('');
       gbc('#delivery-arrive').val('');
+
+      clearLocalStorage(gbcDeliverTo);
+      clearLocalStorage(gbcDeliverInvoices);
+      clearLocalStorage(gbcDeliverLeave);
+      clearLocalStorage(gbcDeliverArrive);
 
       hideLoading();
       getDeliveries();

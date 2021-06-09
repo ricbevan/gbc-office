@@ -185,7 +185,6 @@ function createDelivery() {
   callMonday(mondayQuery, function(data) {
     // setTimeout(function () {
       // clear values
-      gbc('#delivery-date').val('');
       gbc('#delivery-company').val('');
       gbc('#delivery-invoices').val('');
       gbc('#delivery-leave').val('');

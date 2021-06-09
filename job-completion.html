@@ -11,29 +11,27 @@
 
       <div>
         <div class="uk-container uk-container-small uk-margin-medium-top">
-          <div uk-height-viewport>
+          <div class="uk-flex-center" uk-grid>
+            <div class="uk-margin">
+              <img src="https://gbc.uk/media/images/icons/favicon-96x96.png" width="38" height="38" class="uk-margin-small-right" />
+              <input class="uk-input uk-form-width-small" inputmode="numeric" pattern="[0-9]*" type="number" placeholder="Job Number" id="job-number">
+              <button class="uk-button uk-button-primary uk-border-rounded" id="complete-job"><span uk-icon="icon: search"></span></button>
+            </div>
+          </div>
+          <div id="job-editing" class="uk-hidden">
+            <div class="uk-child-width-1-1 uk-grid-medium uk-margin-remove-left" id="job-actions" uk-grid></div>
+            <p class="uk-heading-bullet uk-text-lead uk-margin-large-top">Notes</p>
+            <div class="uk-list uk-list-circle" id="job-updates"></div>
             <div class="uk-flex-center" uk-grid>
-              <div class="uk-margin">
-                <img src="https://gbc.uk/media/images/icons/favicon-96x96.png" width="38" height="38" class="uk-margin-small-right" />
-                <input class="uk-input uk-form-width-small" inputmode="numeric" pattern="[0-9]*" type="number" placeholder="Job Number" id="job-number">
-                <button class="uk-button uk-button-primary uk-border-rounded" id="complete-job"><span uk-icon="icon: search"></span></button>
+              <div class="uk-margin uk-width-1-1">
+                <textarea class="uk-textarea uk-width-1-1" type="text" placeholder="e.g. paramount 1023 gloss" id="job-update"></textarea>
+                <button class="uk-button uk-button-primary uk-border-rounded uk-width-1-1 uk-margin-small-top" id="add-update">Add note</button>
               </div>
             </div>
-            <div id="job-editing" class="uk-hidden">
-              <div class="uk-child-width-1-1 uk-grid-medium uk-margin-remove-left" id="job-actions" uk-grid></div>
-              <p class="uk-heading-bullet uk-text-lead uk-margin-large-top">Notes</p>
-              <div class="uk-list uk-list-circle" id="job-updates"></div>
-              <div class="uk-flex-center" uk-grid>
-                <div class="uk-margin uk-width-1-1">
-                  <textarea class="uk-textarea uk-width-1-1" type="text" placeholder="e.g. paramount 1023 gloss" id="job-update"></textarea>
-                  <button class="uk-button uk-button-primary uk-border-rounded uk-width-1-1 uk-margin-small-top" id="add-update">Add note</button>
-                </div>
-              </div>
-            </div>
-            <div class="uk-flex-center" uk-grid>
-              <div class="uk-margin">
-                <p id="user"></p>
-              </div>
+          </div>
+          <div class="uk-flex-center" uk-grid>
+            <div class="uk-margin">
+              <p id="user"></p>
             </div>
           </div>
 

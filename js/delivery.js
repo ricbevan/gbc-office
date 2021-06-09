@@ -153,7 +153,7 @@ function createDelivery() {
   var deliveryLeave = gbc('#delivery-leave').val();
   var deliveryArrive = gbc('#delivery-arrive').val();
 
-  if (!deliveryCompany || !deliveryInvoices || !deliveryLeave || !deliveryArrive) {
+  if (!deliveryCompany || !deliveryLeave || !deliveryArrive) {
     UIkit.notification({
       message: 'Ensure all text boxes are filled in.',
       status: 'danger',

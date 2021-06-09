@@ -183,10 +183,17 @@ function createDelivery() {
     ') { id } }';
 
   callMonday(mondayQuery, function(data) {
-    setTimeout(function () {
+    // setTimeout(function () {
+      // clear values
+      gbc('#delivery-date').val('');
+      gbc('#delivery-company').val('');
+      gbc('#delivery-invoices').val('');
+      gbc('#delivery-leave').val('');
+      gbc('#delivery-arrive').val('');
+
       hideLoading();
       getDeliveries();
-    }, 3000); // wait 3 seconds for monday to refresh
+    // }, 3000); // wait 3 seconds for monday to refresh
   });
 }
 
@@ -199,10 +206,10 @@ function deleteDelivery(deliveryId) {
     var mondayQuery = 'mutation { archive_item (item_id: ' + deliveryId + ') { id } }';
 
     callMonday(mondayQuery, function(data) {
-      setTimeout(function () {
+      // setTimeout(function () {
         hideLoading();
         getDeliveries();
-      }, 3000); // wait 3 seconds for monday to refresh
+      // }, 3000); // wait 3 seconds for monday to refresh
     });
   }
 }

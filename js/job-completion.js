@@ -207,11 +207,11 @@ function getJobStaff() {
           if (alreadyAssigned) {
             button.classList.add('uk-button-danger');
             button.setAttribute('uk-tooltip', 'title: Remove ' + userName + ' as ' + workBoardColumns[i]['columnName'] + 'er');
-            button.innerHTML = '<span uk-icon="icon: user-x"></span>';
+            button.innerHTML = '<span uk-icon="icon: minus-circle"></span>';
           } else {
             button.classList.add('uk-button-secondary');
             button.setAttribute('uk-tooltip', 'title: Add ' + userName + ' as ' + workBoardColumns[i]['columnName'] + 'er');
-            button.innerHTML = '<span uk-icon="icon: user-plus"></span>';
+            button.innerHTML = '<span uk-icon="icon: plus-circle"></span>';
           }
 
           button.addEventListener('click', function(e) {
